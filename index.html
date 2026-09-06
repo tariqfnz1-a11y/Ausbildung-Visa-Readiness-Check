@@ -1,1 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ausbildung Visa Readiness Check — Pakistan</title>
+<style>
+  @import url('https://fonts.cdnfonts.com/css/ibm-plex-mono');
 
+  :root{
+    --navy:#16263A;
+    --navy-deep:#0E1A28;
+    --paper:#EDE6D6;
+    --paper-light:#F5F0E4;
+    --ink:#2A2620;
+    --ink-soft:#5B5647;
+    --stamp:#A6402F;
+    --stamp-dark:#7E2E20;
+    --gold:#A6802F;
+    --green:#3E6B4F;
+    --line:#C9BFA6;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;}
+
+  /* ---------- Cover ---------- */
+  .cover{
+    background:linear-gradient(160deg,var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--paper-light);
+    padding:56px 24px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 40px);
+    pointer-events:none;
+  }
+  .cover-inner{max-width:760px;margin:0 auto;position:relative;}
+  .ref{
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:#B9C4CF;
+    margin-bottom:18px;
+    display:flex; gap:18px; flex-wrap:wrap;
+  }
+  .cover h1{
+    font-family:'Iowan Old Style',Georgia,serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,42px);
+    line-height:1.15;
+    margin:0 0 14px;
+    max-width:16ch;
+  }
+  .cover p.lede{
+    font-size:16px;
+    color:#CBD5DE;
+    max-width:52ch;
+    margin:0;
+  }
+  .seal{
+    position:absolute; top:44px; right:24px;
+    width:86px; height:86px;
+    border:1.5px solid var(--gold);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    color:var(--gold);
+    font-size:9.5px;
+    letter-spacing:0.06em;
+    line-height:1.3;
+    transform:rotate(-8deg);
+    opacity:0.85;
+  }
+  @media (max-width:640px){ .seal{display:none;} }
+
+  /* ---------- Layout ---------- */
+  .sheet{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+  .perf{
+    height:0;
+    border-top:2px dashed var(--line);
+    margin:0;
+    position:relative;
+  }
+  section{padding:36px 0;border-bottom:1px solid var(--line);}
+  section:last-child{border-bottom:none;}
+
+  h2{
+    font-size:20px;
+    margin:0 0 4px;
+    color:var(--navy);
+  }
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--stamp);
+    letter-spacing:0.05em;
+    margin-bottom:8px;
+    display:block;
+  }
+  .sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 22px; max-width:56ch;}
+
+  /* ---------- Form ---------- */
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:8px;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  .field .hint{font-size:12.5px;color:var(--ink-soft); margin-top:5px; font-family:-apple-system,sans-serif;}
+
+  select, input[type=number], input[type=text]{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--line);
+    background:var(--paper-light);
+    border-radius:3px;
+    font-size:15px;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  select:focus, input:focus{
+    outline:2px solid var(--navy);
+    outline-offset:1px;
+    border-color:var(--navy);
+  }
+
+  .choice-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .choice{
+    flex:1 1 auto;
+    min-width:84px;
+    text-align:center;
+    padding:10px 12px;
+    border:1.5px solid var(--line);
+    border-radius:3px;
+    background:var(--paper-light);
+    cursor:pointer;
+    font-size:14px;
+    font-family:-apple-system,sans-serif;
+    user-select:none;
+    transition:background .12s, border-color .12s;
+  }
+  .choice.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:var(--paper-light);
+  }
+  .choice input{display:none;}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:520px){.two-col{grid-template-columns:1fr;}}
+
+  button.primary{
+    background:var(--stamp);
+    color:var(--paper-light);
+    border:none;
+    padding:15px 26px;
+    font-size:15.5px;
+    font-weight:600;
+    border-radius:3px;
+    cursor:pointer;
+    font-family:-apple-system,sans-serif;
+    letter-spacing:0.01em;
+    width:100%;
+    margin-top:8px;
+    transition:background .15s;
+  }
+  button.primary:hover{background:var(--stamp-dark);}
+  button.secondary{
+    background:none;
+    border:1.5px solid var(--navy);
+    color:var(--navy);
+    padding:10px 18px;
+    border-radius:3px;
+    font-size:13.5px;
+    cursor:pointer;
+    font-family:-apple-system,sans-serif;
+  }
+
+  /* ---------- Result ---------- */
+  #result{display:none;}
+  .stamp-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 20px;
+    border:2.5px solid currentColor;
+    border-radius:6px;
+    transform:rotate(-1.5deg);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    letter-spacing:0.04em;
+    margin-bottom:22px;
+  }
+  .status-ready{color:var(--green);}
+  .status-almost{color:var(--gold);}
+  .status-early{color:var(--stamp);}
+
+  .score-line{
+    height:10px;
+    background:var(--line);
+    border-radius:5px;
+    overflow:hidden;
+    margin:6px 0 4px;
+  }
+  .score-fill{height:100%; background:var(--navy); width:0%; transition:width .5s ease;}
+
+  .checklist{list-style:none; padding:0; margin:18px 0;}
+  .checklist li{
+    display:flex; gap:10px; align-items:flex-start;
+    padding:9px 0;
+    border-bottom:1px dotted var(--line);
+    font-size:14.5px;
+    font-family:-apple-system,sans-serif;
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .mark{
+    flex:0 0 auto;
+    width:20px; height:20px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px;
+    margin-top:1px;
+  }
+  .mark.ok{background:var(--green); color:#fff;}
+  .mark.warn{background:var(--gold); color:#fff;}
+  .mark.bad{background:var(--stamp); color:#fff;}
+
+  .timeline-box{
+    background:var(--navy);
+    color:var(--paper-light);
+    padding:20px 22px;
+    border-radius:5px;
+    margin-top:22px;
+    font-family:-apple-system,sans-serif;
+  }
+  .timeline-box .t-label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9FB1BF; letter-spacing:0.06em; display:block; margin-bottom:6px;}
+  .timeline-box .t-value{font-size:24px; font-weight:700; margin-bottom:4px;}
+
+  /* ---------- Stepper reference ---------- */
+  .steps{counter-reset:step;}
+  .step{
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,sans-serif;
+  }
+  .step:last-child{border-bottom:none;}
+  .step .num{
+    counter-increment:step;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    color:var(--stamp);
+    font-size:14px;
+    padding-top:2px;
+  }
+  .step .num::before{content: counter(step, decimal-leading-zero);}
+  .step h4{margin:0 0 4px; font-size:15px; color:var(--navy);}
+  .step p{margin:0; font-size:13.8px; color:var(--ink-soft);}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  .faq-item:last-child{border-bottom:none;}
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 0;
+    font-size:15px;
+    font-weight:600;
+    color:var(--navy);
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:'+';
+    flex:0 0 auto;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:400;
+    font-size:18px;
+    color:var(--stamp);
+    transition:transform .15s;
+  }
+  .faq-item[open] summary::after{ content:'–'; }
+  .faq-item .faq-a{
+    font-size:14.3px;
+    color:var(--ink-soft);
+    padding:0 0 18px;
+    margin:0;
+    max-width:60ch;
+  }
+
+  footer{
+    text-align:center;
+    padding:26px 24px 40px;
+    font-size:12px;
+    color:var(--ink-soft);
+    font-family:-apple-system,sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="seal">GUTEN<br>WEG<br>2026</div>
+  <div class="cover-inner">
+    <div class="ref mono">
+      <span>DOC: §16a AufenthG</span>
+      <span>ROUTE: Ausbildung (Paid)</span>
+      <span>ISSUED: SEP 2026</span>
+    </div>
+    <h1>Ausbildung Visa Readiness Check</h1>
+    <p class="lede">A working eligibility calculator and step tracker for Pakistani nationals applying for a paid apprenticeship in Germany. Answer the questions below — get a personal readiness score, a gap list, and an estimated timeline.</p>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <section>
+    <span class="section-tag mono">01 — YOUR PROFILE</span>
+    <h2>Tell us where you stand</h2>
+    <p class="sub">Nothing here is stored or sent anywhere — the calculation runs in your browser.</p>
+
+    <div class="two-col">
+      <div class="field">
+        <label for="age">Your age</label>
+        <input type="number" id="age" min="14" max="70" placeholder="e.g. 22">
+      </div>
+      <div class="field">
+        <label>Where in Pakistan are you applying from?</label>
+        <div class="choice-row" id="province">
+          <div class="choice" data-value="isb">Punjab / KPK / Islamabad</div>
+          <div class="choice" data-value="khi">Sindh / Balochistan</div>
+        </div>
+        <p class="hint" id="province-hint">Select a region to see which mission handles your case.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Highest education completed</label>
+      <div class="choice-row" id="education">
+        <div class="choice" data-value="below-matric">Below Matric</div>
+        <div class="choice" data-value="matric">Matric</div>
+        <div class="choice" data-value="fsc">Intermediate / FSc</div>
+        <div class="choice" data-value="bachelor">Bachelor's+</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Current German language level</label>
+      <div class="choice-row" id="german">
+        <div class="choice" data-value="none">None yet</div>
+        <div class="choice" data-value="a1">A1</div>
+        <div class="choice" data-value="a2">A2</div>
+        <div class="choice" data-value="b1">B1</div>
+        <div class="choice" data-value="b2">B2+</div>
+      </div>
+      <p class="hint">Most fields need B1. Nursing / geriatric care need B2.</p>
+    </div>
+
+    <div class="field">
+      <label for="field">Which trade/profession are you training in (or targeting)?</label>
+      <select id="field">
+        <optgroup label="Technology &amp; IT">
+          <option value="it-specialist">IT Specialist (Fachinformatiker)</option>
+          <option value="it-systems">IT Systems Management</option>
+          <option value="electronics-tech">Electronics Technician</option>
+          <option value="mechatronics">Mechatronics Technician</option>
+        </optgroup>
+        <optgroup label="Logistics &amp; Transport">
+          <option value="warehouse-logistics">Warehouse Logistics Specialist (Fachkraft für Lagerlogistik)</option>
+          <option value="freight-forwarding">Freight Forwarding &amp; Logistics Clerk (Spedition)</option>
+          <option value="professional-driver">Professional / Truck Driver (Berufskraftfahrer)</option>
+          <option value="rail-transport">Rail Transport Specialist</option>
+          <option value="port-aviation-logistics">Port / Aviation Logistics Specialist</option>
+        </optgroup>
+        <optgroup label="Skilled Trades &amp; Crafts">
+          <option value="electrician">Electrician (Elektroniker)</option>
+          <option value="plumber-hvac">Plumber / HVAC Technician (Anlagenmechaniker)</option>
+          <option value="carpenter">Carpenter (Tischler/Zimmerer)</option>
+          <option value="metalworker-cnc">Industrial Mechanic / CNC Machinist</option>
+          <option value="automotive-mechatronics">Automotive Mechatronics Technician (Car Mechanic)</option>
+          <option value="painter-varnisher">Painter &amp; Varnisher</option>
+          <option value="roofer">Roofer</option>
+          <option value="bricklayer">Bricklayer / Mason</option>
+        </optgroup>
+        <optgroup label="Healthcare">
+          <option value="nursing">Nursing / Geriatric Care (Pflegefachmann/-frau)</option>
+          <option value="dental-assistant">Dental Assistant</option>
+          <option value="pharmacy-assistant">Pharmacy Assistant</option>
+        </optgroup>
+        <optgroup label="Hospitality &amp; Food">
+          <option value="hotel-specialist">Hotel Specialist</option>
+          <option value="restaurant-specialist">Restaurant Specialist / Waiter</option>
+          <option value="chef-cook">Chef / Cook</option>
+          <option value="baker">Baker</option>
+          <option value="butcher">Butcher</option>
+        </optgroup>
+        <optgroup label="Commerce &amp; Office">
+          <option value="retail">Retail Salesperson (Einzelhandel)</option>
+          <option value="office-management">Office Management Clerk</option>
+          <option value="bank-clerk">Bank Clerk</option>
+          <option value="industrial-clerk">Industrial Clerk (Industriekaufmann/-frau)</option>
+        </optgroup>
+        <optgroup label="Agriculture &amp; Environment">
+          <option value="farmer">Farmer / Agricultural Specialist</option>
+          <option value="gardener-landscaper">Gardener / Landscaper</option>
+          <option value="forestry">Forestry Worker</option>
+        </optgroup>
+        <optgroup label="Personal Care">
+          <option value="hairdresser">Hairdresser</option>
+          <option value="beautician">Beautician / Cosmetician</option>
+        </optgroup>
+        <optgroup label="Other">
+          <option value="other">Other / Not listed here</option>
+        </optgroup>
+      </select>
+      <p class="hint">Most trades need B1 German. Healthcare (nursing, dental, pharmacy) and bank clerk roles typically need B2.</p>
+    </div>
+
+    <div class="field">
+      <label>Other skills &amp; licenses (select all that apply)</label>
+      <div class="choice-row" id="skills" data-multi="true">
+        <div class="choice" data-value="license-b">Driving license (Car, Class B)</div>
+        <div class="choice" data-value="license-c">Heavy vehicle license (Class C/CE)</div>
+        <div class="choice" data-value="forklift">Forklift certificate</div>
+        <div class="choice" data-value="first-aid">First aid certificate</div>
+        <div class="choice" data-value="computer">Computer / MS Office skills</div>
+        <div class="choice" data-value="experience">Prior relevant work experience</div>
+        <div class="choice" data-value="english">English B2+ proficiency</div>
+      </div>
+      <p class="hint">Not mandatory for most trades — but a driving license and forklift certificate carry real weight for logistics and driving apprenticeships.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-tag mono">02 — OFFER &amp; CONTRACT</span>
+    <h2>Your employer situation</h2>
+
+    <div class="field">
+      <label>Do you have a signed Ausbildungsvertrag (training contract)?</label>
+      <div class="choice-row" id="contract">
+        <div class="choice" data-value="yes">Yes, signed</div>
+        <div class="choice" data-value="interviewing">Interviewing</div>
+        <div class="choice" data-value="no">Not yet</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="wage">Expected / offered monthly net training wage (EUR)</label>
+      <input type="number" id="wage" min="0" placeholder="e.g. 650 — leave blank if unknown">
+      <p class="hint">2026 self-sufficiency line is roughly €822 net/month. Below that, or unpaid, usually needs a blocked account.</p>
+    </div>
+
+    <div class="field">
+      <label>Can you access ≈ €11,904 (or the PKR equivalent) for a blocked account if needed?</label>
+      <div class="choice-row" id="funds">
+        <div class="choice" data-value="yes">Yes</div>
+        <div class="choice" data-value="partial">Partially</div>
+        <div class="choice" data-value="no">No</div>
+        <div class="choice" data-value="na">Not needed (wage covers it)</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-tag mono">03 — DOCUMENTS &amp; RECORD</span>
+    <h2>Paperwork basics</h2>
+
+    <div class="two-col">
+      <div class="field">
+        <label for="passport">Months of passport validity remaining</label>
+        <input type="number" id="passport" min="0" placeholder="e.g. 24">
+      </div>
+      <div class="field">
+        <label>Clean police / character record?</label>
+        <div class="choice-row" id="record">
+          <div class="choice" data-value="yes">Yes</div>
+          <div class="choice" data-value="unsure">Not sure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Have your school/degree certificates been attested (IBCC/HEC)?</label>
+      <div class="choice-row" id="attest">
+        <div class="choice" data-value="yes">Yes, done</div>
+        <div class="choice" data-value="progress">In progress</div>
+        <div class="choice" data-value="no">Not started</div>
+      </div>
+    </div>
+
+    <button class="primary" onclick="calculate()">Calculate my readiness</button>
+  </section>
+
+  <section id="result">
+    <span class="section-tag mono">RESULT</span>
+    <h2 id="result-heading">Your readiness assessment</h2>
+
+    <div id="stamp-container"></div>
+
+    <div class="score-line"><div class="score-fill" id="score-fill"></div></div>
+    <p class="hint mono" id="score-text" style="margin-bottom:0;"></p>
+
+    <ul class="checklist" id="checklist"></ul>
+
+    <div class="timeline-box">
+      <span class="t-label mono">ESTIMATED TIME TO VISA-READY</span>
+      <div class="t-value" id="timeline-value">—</div>
+      <p style="margin:0;font-size:13.5px;color:#C7D2DB;" id="timeline-note"></p>
+    </div>
+  </section>
+
+  <div class="perf"></div>
+
+  <section>
+    <span class="section-tag mono">REFERENCE</span>
+    <h2>The full A–Z procedure, as 16 steps</h2>
+    <p class="sub">For context on what comes after each item above.</p>
+    <div class="steps" id="steps"></div>
+  </section>
+
+  <section>
+    <span class="section-tag mono">FAQ</span>
+    <h2>Common questions from Pakistani applicants</h2>
+    <p class="sub">Short, direct answers. Always reconfirm specifics with the embassy or VFS before acting on them.</p>
+
+    <details class="faq-item">
+      <summary>Do I need a job offer before I can apply for the visa?</summary>
+      <p class="faq-a">Yes, for the standard paid Ausbildung visa (§16a AufenthG) you need a signed training contract first. If you don't have one yet, a separate visa — the §17 AufenthG "Ausbildungsplatzsuche" (training-place search) visa — lets you enter Germany for up to 9 months on a single entry specifically to find and sign one. It has its own, separate requirements.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What's the actual minimum German level — can I get away with less than B1?</summary>
+      <p class="faq-a">B1 is the practical minimum for most trades, and B2 for healthcare fields (nursing, dental, pharmacy) and bank clerk roles. A few technical/industrial employers will accept A2 with a commitment to reach B1 during training, but this is employer-specific and carries more interview risk — don't count on it as your plan.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Do I need a blocked account (Sperrkonto) if my apprenticeship is paid?</summary>
+      <p class="faq-a">Usually not. If your training wage is at least around €822 net per month (2026 figure), your contract and payslip are normally accepted as proof of financial means on their own. A blocked account (~€11,904/year) is mainly needed if your wage is lower than that, or if the training is unpaid/school-based.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How much does this whole process cost in total?</summary>
+      <p class="faq-a">Excluding flights and any blocked account, realistically PKR 350,000–750,000 (~$1,250–$2,700), most of it going to German language courses and exam fees rather than the visa itself. The national visa fee is €75 and the VFS service fee is €38 (2026 baseline).</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does the whole process actually take?</summary>
+      <p class="faq-a">From zero German to arrival in Germany, 9–18 months is realistic. The two biggest levers are how long it takes you to reach B1/B2, and the current 3–6 month embassy appointment and processing wait from Pakistan.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is there an age limit?</summary>
+      <p class="faq-a">Generally 16 and up, with no strict legal upper limit. Applicants over roughly 35 may face more questions at the visa interview about their motivation, but older applicants are not automatically refused.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Will my Pakistani Matric/FSc certificates be accepted?</summary>
+      <p class="faq-a">Generally yes, once attested through IBCC (school certificates) or HEC (degrees) and legalized as the embassy requires. Recognition is still assessed case by case for the specific training program, so start attestation early — it's usually the slowest single step (4–8 weeks).</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I bring my spouse or children on this visa?</summary>
+      <p class="faq-a">Generally not in the early stages of a training-visa category — this route is designed around the individual trainee. Family reunification rules are separate and stricter for trainees than for established skilled workers.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I switch employers if I don't like the one I signed with?</summary>
+      <p class="faq-a">Your residence permit is tied to the specific training contract you entered on. Changing employers mid-training is possible but requires approval from the local Foreigners' Office (Ausländerbehörde) — it's not automatic.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What happens after I finish the Ausbildung — can I stay in Germany?</summary>
+      <p class="faq-a">Yes. Qualified professionals commonly earn €2,000–3,500/month after completion. A facilitated path to permanent residence exists under §18c AufenthG after a few years of qualified employment, and citizenship is possible after 5 years of legal residence under the 2024 reform — which also allows dual nationality, relevant since Pakistan recognizes dual citizenship with Germany.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is a driving license necessary?</summary>
+      <p class="faq-a">Only for specific trades. A professional/truck driver apprenticeship (Berufskraftfahrer) usually expects you to already hold a Class B (car) license before starting, and you train toward Class C/CE during the program. For most other trades a driving license isn't required, though it's a plus for logistics and automotive roles.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I avoid fake "guaranteed placement" agents?</summary>
+      <p class="faq-a">Never pay a large upfront fee for a "guaranteed" apprenticeship. Verify any employer independently through the relevant German Chamber (IHK/HWK) registry, and cross-check the listing on the official arbeitsagentur.de job board. A genuine Ausbildung pays you — be suspicious of any program asking you to pay tuition for one.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does this calculator submit my information anywhere?</summary>
+      <p class="faq-a">No. Everything runs locally in your browser — nothing is stored, logged, or sent to a server. You can fill it in as many times as you like as your situation changes.</p>
+    </details>
+  </section>
+
+  <footer>
+    Based on 2026 rules under §16a AufenthG. Fees and thresholds change periodically — reconfirm on
+    pakistan.diplo.de and visa.vfsglobal.com/one-pager/germany/pakistan before paying anything.
+  </footer>
+
+</div>
+
+<script>
+  // ---- choice-row handling (single-select rows toggle exclusively, data-multi rows toggle independently) ----
+  document.querySelectorAll('.choice-row').forEach(row=>{
+    row.addEventListener('click', e=>{
+      const choice = e.target.closest('.choice');
+      if(!choice) return;
+      if(row.dataset.multi === 'true'){
+        choice.classList.toggle('active');
+      } else {
+        [...row.children].forEach(c=>c.classList.remove('active'));
+        choice.classList.add('active');
+      }
+      if(row.id === 'province') updateProvinceHint();
+    });
+  });
+
+  function getChoice(id){
+    const row = document.getElementById(id);
+    const active = row.querySelector('.choice.active');
+    return active ? active.dataset.value : null;
+  }
+
+  function getMultiChoices(id){
+    const row = document.getElementById(id);
+    return [...row.querySelectorAll('.choice.active')].map(c=>c.dataset.value);
+  }
+
+  function updateProvinceHint(){
+    const val = getChoice('province');
+    const hint = document.getElementById('province-hint');
+    if(val==='isb') hint.textContent = 'Your application goes through the German Embassy, Islamabad.';
+    else if(val==='khi') hint.textContent = 'Your application goes through the German Consulate General, Karachi.';
+    else hint.textContent = 'Select a region to see which mission handles your case.';
+  }
+
+  // ---- Trade requirements ----
+  const tradeInfo = {
+    'it-specialist':{lang:'b1', group:'Technology & IT'},
+    'it-systems':{lang:'b1', group:'Technology & IT'},
+    'electronics-tech':{lang:'b1', group:'Technology & IT'},
+    'mechatronics':{lang:'b1', group:'Technology & IT'},
+    'warehouse-logistics':{lang:'b1', group:'Logistics & Transport', logistics:true},
+    'freight-forwarding':{lang:'b1', group:'Logistics & Transport', logistics:true},
+    'professional-driver':{lang:'b1', group:'Logistics & Transport', logistics:true, needsDriving:true},
+    'rail-transport':{lang:'b1', group:'Logistics & Transport', logistics:true},
+    'port-aviation-logistics':{lang:'b1', group:'Logistics & Transport', logistics:true},
+    'electrician':{lang:'b1', group:'Skilled Trades'},
+    'plumber-hvac':{lang:'b1', group:'Skilled Trades'},
+    'carpenter':{lang:'b1', group:'Skilled Trades'},
+    'metalworker-cnc':{lang:'b1', group:'Skilled Trades'},
+    'automotive-mechatronics':{lang:'b1', group:'Skilled Trades'},
+    'painter-varnisher':{lang:'b1', group:'Skilled Trades'},
+    'roofer':{lang:'b1', group:'Skilled Trades'},
+    'bricklayer':{lang:'b1', group:'Skilled Trades'},
+    'nursing':{lang:'b2', group:'Healthcare'},
+    'dental-assistant':{lang:'b2', group:'Healthcare'},
+    'pharmacy-assistant':{lang:'b2', group:'Healthcare'},
+    'hotel-specialist':{lang:'b1', group:'Hospitality & Food'},
+    'restaurant-specialist':{lang:'b1', group:'Hospitality & Food'},
+    'chef-cook':{lang:'b1', group:'Hospitality & Food'},
+    'baker':{lang:'b1', group:'Hospitality & Food'},
+    'butcher':{lang:'b1', group:'Hospitality & Food'},
+    'retail':{lang:'b1', group:'Commerce & Office'},
+    'office-management':{lang:'b1', group:'Commerce & Office'},
+    'bank-clerk':{lang:'b2', group:'Commerce & Office'},
+    'industrial-clerk':{lang:'b1', group:'Commerce & Office'},
+    'farmer':{lang:'b1', group:'Agriculture & Environment'},
+    'gardener-landscaper':{lang:'b1', group:'Agriculture & Environment'},
+    'forestry':{lang:'b1', group:'Agriculture & Environment'},
+    'hairdresser':{lang:'b1', group:'Personal Care'},
+    'beautician':{lang:'b1', group:'Personal Care'},
+    'other':{lang:'b1', group:'Other'}
+  };
+
+  const steps = [
+    ["Start German language study","Begin A1 onward, 9–12 months before your intended start date."],
+    ["Reach B1 (or B2 for healthcare)","Get the official Goethe-Institut, telc, or ÖSD certificate."],
+    ["Search & apply to real openings","Use arbeitsagentur.de and verified employer listings — apply to several at once."],
+    ["Interview with the employer","Often by video call; be specific about your trade choice and plans."],
+    ["Sign the Ausbildungsvertrag","Your formal training contract — required before the visa stage."],
+    ["Attest your certificates","IBCC (school) and HEC (degree) — run this in parallel, it's the slowest step."],
+    ["Assemble the visa document set","Contract, attestations, CV in German format, motivation letter, insurance, etc."],
+    ["Book your embassy/VFS appointment","Islamabad or Karachi Consulate — book early, slots run 3–6 months out."],
+    ["Pay the visa fee + VFS fee","€75 national visa fee + €38 VFS service fee (2026 baseline)."],
+    ["Attend the visa interview","Be honest and specific about training field, German level, and plans."],
+    ["Wait for processing","Currently 3–6 months from Pakistan."],
+    ["Visa issued — book your flight","Arrange initial accommodation before departure."],
+    ["Register your address (Anmeldung)","Within 2 weeks of arrival, at the local Bürgeramt."],
+    ["Enroll in health insurance","Usually arranged together with your employer."],
+    ["Apply for your residence permit","At the local Ausländerbehörde — converts your visa into a permit."],
+    ["Begin your Ausbildung","Welcome to your training — attendance at work and school is now mandatory."]
+  ];
+  const stepsEl = document.getElementById('steps');
+  steps.forEach(([title,desc])=>{
+    const div = document.createElement('div');
+    div.className='step';
+    div.innerHTML = `<div class="num"></div><div><h4>${title}</h4><p>${desc}</p></div>`;
+    stepsEl.appendChild(div);
+  });
+
+  function calculate(){
+    const age = parseFloat(document.getElementById('age').value);
+    const education = getChoice('education');
+    const german = getChoice('german');
+    const field = document.getElementById('field').value;
+    const contract = getChoice('contract');
+    const wage = parseFloat(document.getElementById('wage').value);
+    const funds = getChoice('funds');
+    const passportMonths = parseFloat(document.getElementById('passport').value);
+    const record = getChoice('record');
+    const attest = getChoice('attest');
+
+    const province = getChoice('province');
+    const skills = getMultiChoices('skills');
+
+    if(!education || !german || !contract || !funds || !record || !attest || isNaN(age)){
+      alert('Please fill in every field above (age, education, German level, contract, funds, passport, record, attestation) so the calculation is accurate.');
+      return;
+    }
+
+    const trade = tradeInfo[field] || tradeInfo['other'];
+    let score = 0;
+    const rawMax = 105; // 100 base + up to 5 skills bonus
+    const items = []; // {status: 'ok'|'warn'|'bad', text}
+
+    // Age (15 pts)
+    if(age>=16 && age<=35){ score+=15; items.push(['ok', `Age ${age} is well within the typical accepted range.`]); }
+    else if(age>35 && age<=45){ score+=9; items.push(['warn', `Age ${age} is acceptable but may draw extra interview questions.`]); }
+    else if(age<16){ score+=0; items.push(['bad', `Under 16 — needs guardian arrangements confirmed with the embassy first.`]); }
+    else { score+=4; items.push(['warn', `Age ${age} is above the typical range — still possible, expect closer scrutiny.`]); }
+
+    // Education (10 pts)
+    if(education==='below-matric'){ score+=2; items.push(['bad','Below Matric — most Ausbildung programs require at least Matric-level schooling.']); }
+    else if(education==='matric'){ score+=8; items.push(['ok','Matric meets the minimum education bar for most fields.']); }
+    else { score+=10; items.push(['ok','Your education level comfortably meets requirements.']); }
+
+    // German level vs the selected trade (25 pts — the biggest single factor)
+    const levelRank = {none:0, a1:1, a2:2, b1:3, b2:4};
+    const needed = trade.lang==='b2' ? 4 : 3;
+    const needLabel = trade.lang==='b2' ? 'B2' : 'B1';
+    const have = levelRank[german];
+    if(have>=needed){ score+=25; items.push(['ok', `Your German level (${german.toUpperCase()}) meets the ${needLabel} requirement for this trade.`]); }
+    else if(have===needed-1){ score+=14; items.push(['warn', `Your German level (${german.toUpperCase()}) is one step below the ${needLabel} this trade usually needs — close, keep studying.`]); }
+    else { score+=Math.max(0, have*3); items.push(['bad', `Your German level (${german==='none'?'none yet':german.toUpperCase()}) is below the ${needLabel} usually required for this trade — this is your single biggest gap.`]); }
+
+    // Contract (20 pts)
+    if(contract==='yes'){ score+=20; items.push(['ok','You have a signed training contract — the visa file can move forward.']); }
+    else if(contract==='interviewing'){ score+=10; items.push(['warn','You are in the interview stage — no visa application yet possible until a contract is signed.']); }
+    else { score+=2; items.push(['bad','No training contract yet — this has to come before any visa steps.']); }
+
+    // Financials (15 pts)
+    const sufficientWage = !isNaN(wage) && wage>=822;
+    if(sufficientWage){ score+=15; items.push(['ok', `Your offered wage (€${wage}) meets the ~€822 self-sufficiency line — likely no blocked account needed.`]); }
+    else if(funds==='na'){ score+=15; items.push(['ok','Financials marked as covered by your wage.']); }
+    else if(funds==='yes'){ score+=13; items.push(['ok','You can fund a blocked account (~€11,904) if your wage falls short.']); }
+    else if(funds==='partial'){ score+=6; items.push(['warn','You can only partially fund a blocked account — start saving or find a higher-paying offer now.']); }
+    else { score+=1; items.push(['bad','Wage is below the self-sufficiency line and you cannot currently fund a blocked account — this needs to be resolved before applying.']); }
+
+    // Passport validity (5 pts)
+    if(!isNaN(passportMonths) && passportMonths>=12){ score+=5; items.push(['ok','Passport validity is comfortable.']); }
+    else if(!isNaN(passportMonths) && passportMonths>=6){ score+=3; items.push(['warn','Passport validity is a little tight — consider renewing before applying.']); }
+    else { score+=0; items.push(['bad','Passport validity is too short or unknown — renew before you book any appointment.']); }
+
+    // Record (5 pts)
+    if(record==='yes'){ score+=5; items.push(['ok','Clean record confirmed.']); }
+    else { score+=2; items.push(['warn','Confirm your record status before applying — this is checked during processing.']); }
+
+    // Attestation (5 pts)
+    if(attest==='yes'){ score+=5; items.push(['ok','Certificate attestation is already done — one less bottleneck.']); }
+    else if(attest==='progress'){ score+=3; items.push(['warn','Attestation in progress — this is usually the slowest step (4–8 weeks), keep pushing it forward.']); }
+    else { score+=0; items.push(['bad','Attestation not started — start this today, it typically bottlenecks the whole timeline.']); }
+
+    // Other skills & licenses (up to 5 bonus pts, weighted higher when relevant to the chosen trade)
+    const skillLabels = {
+      'license-b':'Driving license (Class B)', 'license-c':'Heavy vehicle license (C/CE)',
+      'forklift':'Forklift certificate', 'first-aid':'First aid certificate',
+      'computer':'Computer / MS Office skills', 'experience':'Prior relevant work experience',
+      'english':'English B2+ proficiency'
+    };
+    let skillBonus = 0;
+    skills.forEach(s=>{
+      let weight = 1;
+      if(trade.logistics && ['license-b','license-c','forklift'].includes(s)) weight = 2;
+      if(field==='automotive-mechatronics' && s==='license-b') weight = 1.5;
+      skillBonus += weight;
+    });
+    skillBonus = Math.min(skillBonus, 5);
+    score += skillBonus;
+    if(skills.length>0){
+      items.push(['ok', `Additional skills noted: ${skills.map(s=>skillLabels[s]).join(', ')}.`]);
+    }
+    if(trade.needsDriving && !skills.includes('license-b')){
+      items.push(['warn', 'Professional driver training usually expects a Class B driving license already — plan to obtain one before applying.']);
+    }
+
+    const pct = Math.round((score / rawMax) * 100);
+
+    // ---- Status ----
+    let statusClass, statusLabel, heading;
+    if(pct>=80){
+      statusClass='status-ready'; statusLabel='LIKELY READY TO APPLY'; heading='You are close to visa-application stage';
+    } else if(pct>=50){
+      statusClass='status-almost'; statusLabel='ALMOST READY'; heading='A few gaps stand between you and applying';
+    } else {
+      statusClass='status-early'; statusLabel='EARLY STAGE'; heading='Focus on the fundamentals first';
+    }
+
+    document.getElementById('result-heading').textContent = heading;
+    document.getElementById('stamp-container').innerHTML =
+      `<div class="stamp-badge ${statusClass}">● ${statusLabel}</div>`;
+    document.getElementById('score-fill').style.width = pct+'%';
+    document.getElementById('score-text').textContent = `READINESS SCORE: ${pct} / 100`;
+
+    const checklistEl = document.getElementById('checklist');
+    checklistEl.innerHTML = '';
+    items.forEach(([status,text])=>{
+      const mark = status==='ok' ? '✓' : status==='warn' ? '!' : '✕';
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="mark ${status==='ok'?'ok':status==='warn'?'warn':'bad'}">${mark}</span><span>${text}</span>`;
+      checklistEl.appendChild(li);
+    });
+
+    // ---- Timeline estimate ----
+    let months = 0;
+    const germanMonthsRemaining = {none:12, a1:9, a2:6, b1: trade.lang==='b2'?6:0, b2:0};
+    months += germanMonthsRemaining[german];
+    if(contract==='no') months = Math.max(months, 4) + 3; // job search overlap
+    if(contract==='interviewing') months = Math.max(months, 1);
+    if(attest==='no') months += 2; else if(attest==='progress') months += 1;
+    months += 5; // fixed: embassy appointment wait + processing (3-6mo average)
+
+    document.getElementById('timeline-value').textContent = `~${months} months`;
+    document.getElementById('timeline-note').textContent =
+      `From today to likely arrival in Germany, assuming steady progress on the items marked above. This includes the current 3–6 month embassy appointment and processing wait.`;
+
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('result').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+</script>
+
+</body>
+</html>
